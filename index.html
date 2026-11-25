@@ -1146,6 +1146,9 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
 .top::after{content:none!important}
 /* "Notable work" in the italic of the logo, not small caps */
 .credit .nwcap{font-family:"Playfair Display","Times New Roman",serif!important;font-style:italic!important;font-size:clamp(22px,2.2vw,34px)!important;font-weight:400!important;letter-spacing:-.01em!important;text-transform:none!important;color:#fff!important;margin-bottom:clamp(8px,1.6vh,16px)!important}
+.inq.done .np{display:none}
+.inq .btn:disabled{opacity:.6;cursor:default}
+.sent{font-size:16px!important;color:var(--fg)!important}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 </head>
@@ -1324,6 +1327,7 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
       <fieldset class="mrow need"><legend class="sr">What do you need?</legend><label><input type="radio" name="need" value="Single page" checked /><span>Single page</span></label><label><input type="radio" name="need" value="3 pages" /><span>3 pages</span></label><label><input type="radio" name="need" value="5 pages" /><span>5 pages</span></label><label><input type="radio" name="need" value="6–8 pages" /><span>6–8 pages</span></label><label><input type="radio" name="need" value="Site maintenance" /><span>Site maintenance</span></label><label><input type="radio" name="need" value="Not sure yet" /><span>Not sure yet</span></label></fieldset>
       <div class="mrow"><input type="text" name="biz" placeholder="Business or field" aria-label="Business or field" autocomplete="organization" /></div>
       <textarea name="msg" rows="3" placeholder="Anything else?" aria-label="Your message, optional"></textarea>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" />
       <div class="mfoot"><button class="btn" type="submit">Send inquiry</button><span class="np">No payment now</span><p class="sent" id="sent" role="status"></p></div>
     </form>
     </div>
@@ -1586,11 +1590,22 @@ addEventListener('DOMContentLoaded', () => {
   if (location.hash === '#checkout') setTimeout(() => lenis ? lenis.scrollTo('#checkout', { immediate: true, force: true, offset: -70 }) : $('#checkout').scrollIntoView(), 400);
 
   // inquiry: there is no server behind this page, so the form writes the email for them and opens their mail app
-  $('#inq').addEventListener('submit', e => {
-    e.preventDefault(); const f = e.target, d = new FormData(f);
-    const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nBusiness or field: ${d.get('biz') || '-'}\nOrder: ${ORD.name} (${ORD.price})\n\n${d.get('msg')}`;
-    location.href = 'mailto:sitesbyblake@gmail.com?subject=' + encodeURIComponent('Website inquiry: ' + ORD.name) + '&body=' + encodeURIComponent(body);
-    $('#sent').textContent = 'Your email app should now be open with this message ready. Press send there to finish.';
+  // inquiries are delivered straight to the inbox by a form-forwarding service; no email app opens
+  const SEND_TO = 'https://formsubmit.co/ajax/sitesbyblake@gmail.com';
+  $('#inq').addEventListener('submit', async e => {
+    e.preventDefault(); const f = e.target, d = new FormData(f), btn = $('button[type=submit]', f), note = $('#sent');
+    if (d.get('_honey')) return; // filled only by spam robots
+    btn.disabled = true; const label = btn.textContent; btn.textContent = 'Sending…'; note.textContent = '';
+    try {
+      const r = await fetch(SEND_TO, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({
+        _subject: 'Website inquiry: ' + ORD.name, _template: 'table', _captcha: 'false',
+        Name: d.get('name'), Email: d.get('email'), 'Business or field': d.get('biz') || '-', Package: `${ORD.name} (${ORD.price})`, Message: d.get('msg') || '-' }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || String(j.success) === 'false') throw new Error(j.message || 'not sent');
+      f.reset(); stamp(); f.classList.add('done'); btn.textContent = 'Sent'; note.textContent = 'Thank you. Your inquiry is in, and you’ll hear back soon.';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = label; note.textContent = 'That didn’t send. Please try again, or email sitesbyblake@gmail.com.';
+    }
   });
 
   // pricing tabs: new-site packages and site maintenance share one window
@@ -1681,3 +1696,4 @@ addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+

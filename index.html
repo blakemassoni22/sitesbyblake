@@ -1149,6 +1149,90 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
 .inq.done .np{display:none}
 .inq .btn:disabled{opacity:.6;cursor:default}
 .sent{font-size:16px!important;color:var(--fg)!important}
+/* project films and card stills are shown whole, at their own shape, never trimmed */
+.phero figure{width:min(100%,calc((100svh - 68px - clamp(32px,4.8vw,68px)) * var(--ar,1.778)))!important;background:#000!important}
+.phero video{aspect-ratio:var(--ar,1.778)!important;object-fit:contain!important;height:auto;background:#000}
+.pphotos img{object-fit:contain}
+/* project screen: name and link, four facts, the write-up beside what is on the site */
+.ptop,.pfacts,.pabout{max-width:1380px;margin:0 auto;padding-left:var(--g);padding-right:var(--g)}
+.ptop{display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(20px,4vw,60px);padding-top:clamp(40px,7vh,90px)}
+.ptop h2{font-size:clamp(52px,8vw,128px);line-height:.94;letter-spacing:-.01em}
+.ptop .ptag{font-family:"Playfair Display","Times New Roman",serif;font-style:italic;font-size:clamp(20px,2vw,32px);line-height:1.2;color:rgba(255,255,255,.82);margin-top:clamp(10px,1.6vh,18px)}
+.ptop .btn{flex:none;margin-bottom:6px}
+.pfacts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(16px,2.4vw,40px);margin-top:clamp(34px,6vh,70px)}
+.pfacts div{padding:clamp(16px,2.2vh,24px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pfacts dt,.pabout h3{font-family:var(--sans);font-size:15px;font-weight:400;letter-spacing:0;color:var(--muted)}
+.pfacts dd{margin:8px 0 0;font-family:var(--serif);font-size:clamp(20px,1.8vw,28px);line-height:1.15;color:var(--fg)}
+.pabout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(30px,6vw,110px);padding-top:clamp(40px,7vh,84px);align-items:start}
+.pabout h3{margin-bottom:clamp(14px,2vh,22px)}
+.pabout p{font-family:var(--serif);font-size:clamp(23px,2.3vw,37px);line-height:1.22;letter-spacing:-.005em;color:var(--fg)}
+.pabout ul{list-style:none;border-top:1px solid var(--line)}
+.pabout li{padding:clamp(13px,1.9vh,19px) 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:clamp(20px,1.8vw,28px);line-height:1.15;color:var(--fg)}
+.pshots{max-width:1380px}
+@media (max-width:760px){
+  .ptop{flex-direction:column;align-items:flex-start}
+  .ptop .btn{max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:center}
+  .pfacts{grid-template-columns:1fr 1fr}
+  .pfacts div:nth-child(n+3){border-top:0}
+  .pabout{grid-template-columns:1fr}
+}
+/* phone: fewer rows of pictures, so the lines of words over them pass in less scrolling */
+@media (max-width:760px){#collage .crow:nth-of-type(2),#collage .crow:nth-of-type(4),#collage .crow:nth-of-type(6){display:none}}
+/* phone: notable work fills the screen evenly, each number sitting over its own phone */
+@media (max-width:860px){
+  #credit{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:76px;padding-bottom:24px}
+  #credit .cred{width:100%;gap:clamp(14px,2.4svh,24px) 14px}
+  .credit .mid p.nwsub{order:2!important;font-size:clamp(19px,5.2vw,26px);margin:clamp(6px,1.2svh,12px) auto 0;max-width:15em}
+  .credit .stats{order:3!important;display:grid;grid-template-columns:1fr 1fr;gap:0 14px;width:100%;margin-top:clamp(22px,4svh,40px)}
+  .credit .stats strong{font-size:clamp(44px,14vw,64px)}
+  .credit .stats span{font-size:13px;margin-top:6px;overflow-wrap:anywhere}
+  .phone{--w:min(43vw,250px,36svh)!important;width:var(--w)}
+}
+/* project film: one click swaps in the real site, in the same frame */
+.phero figure{position:relative;cursor:pointer}
+.phero iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.plive{position:absolute;left:50%;bottom:clamp(12px,2.2vw,28px);transform:translateX(-50%);white-space:nowrap;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#fff;padding:13px 18px;border:1px solid rgba(255,255,255,.75);background:rgba(10,10,10,.62);transition:background .4s,color .4s}
+.phero figure:hover .plive{background:#fff;color:#0a0a0a}
+.phero figure.live{cursor:auto}
+.phero figure.live .plive{display:none}
+@media (max-width:760px){.phero figure.live video{aspect-ratio:auto!important;height:70svh}.plive{font-size:11px;padding:10px 13px}}
+/* the chosen package or maintenance option is a solid white rectangle with black lettering */
+#pricing .pack.picked,#pricing .fix.picked{background:#fff!important;color:#0a0a0a!important;box-shadow:none!important}
+#pricing .pack.picked h3,#pricing .fix.picked h4,#pricing .pack.picked b,#pricing .fix.picked b{color:#0a0a0a!important;font-family:var(--serif)!important;font-style:normal!important}
+#pricing .pack.picked span,#pricing .fix.picked span{color:#3d3a36!important}
+#pricing .pack,#pricing .fix{transition:background .3s,color .3s}
+/* pricing: oversized italic page counts, a large running total, fewer words */
+#pricing .pack h3 i{font-family:"Playfair Display","Times New Roman",serif;font-style:italic;font-size:1.25em;line-height:1;margin-right:.1em;letter-spacing:-.02em}
+#pricing .pack{align-items:center!important}
+.total{display:flex;flex-direction:column;gap:clamp(6px,1vh,12px);margin-bottom:clamp(4px,1.4vh,16px)}
+.total em{font-family:"Playfair Display","Times New Roman",serif;font-style:italic;font-size:clamp(22px,2vw,32px);line-height:1.1;color:#fff}
+.total strong{font-family:var(--serif);font-weight:400;font-size:clamp(46px,5.2vw,84px);line-height:.95;letter-spacing:-.02em;color:var(--fg);font-variant-numeric:tabular-nums}
+.total strong.long{font-size:clamp(34px,3.6vw,58px)}
+#pricing .np,#pricing .fix span{display:none!important}
+/* the line under the b sits on its own layer, so it always repaints when you return to the top */
+/* collage: every picture whole, never trimmed; photographs sit on a black mount with the address of the site they come from */
+.frame{background-size:contain!important;object-fit:contain!important;background-color:#000;transform:none!important}
+.tile{background:#000!important}
+.tile.solo .frame{inset:6% 6% 15% 6%;width:auto;height:auto}
+.tile.solo::after{content:attr(data-site);position:absolute;z-index:3;left:6%;right:6%;bottom:4.2%;font-family:var(--sans);font-size:clamp(10px,.95vw,14px);font-weight:400;letter-spacing:.02em;color:#cfcabf;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+/* pricing: the left column stays put when the message box is stretched */
+#pricing .wrap{align-items:start!important;grid-template-rows:auto 1fr}
+@media (min-width:861px){#pricing .cowrap{grid-column:2;grid-row:1/3}#pricing .fine{grid-column:1;grid-row:2}}
+/* footer: email above the phone number */
+.f-info a[href^="mailto"]{font-size:clamp(22px,2.4vw,38px)}
+/* footer: centred and friendly */
+.foot.cute{display:flex!important;flex-direction:column;align-items:center;text-align:center;padding:clamp(70px,12vh,130px) var(--g) 24px!important}
+.foot.cute .f-mark{display:inline-flex;align-items:center;transition:transform .7s cubic-bezier(.34,1.56,.64,1)}
+.foot.cute .f-say{margin:clamp(26px,5vh,48px) 0 clamp(8px,1.4vh,14px);font-family:"Playfair Display","Times New Roman",serif;font-style:italic;font-size:clamp(20px,1.9vw,28px);color:#cfcabf}
+.foot.cute .f-line{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px clamp(28px,4vw,60px);margin-top:clamp(30px,5.5vh,54px);font-family:var(--serif);font-size:clamp(24px,2.6vw,40px);line-height:1.15}
+.foot.cute .f-line a{color:var(--fg);background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .5s cubic-bezier(.16,1,.3,1)}
+.foot.cute .f-line a:hover{background-size:100% 1px}
+.foot.cute i{font-style:normal;display:inline-block;animation:fbeat 2.4s ease-in-out infinite}
+.foot.cute .f-line i{font-size:.6em;color:#cfcabf}
+@keyframes fbeat{0%,100%{transform:scale(1)}12%{transform:scale(1.28)}24%{transform:scale(1)}36%{transform:scale(1.18)}48%{transform:scale(1)}}
+.foot.cute .f-end{display:flex!important;justify-content:space-between;align-self:stretch;gap:8px 16px;flex-wrap:wrap;margin-top:clamp(40px,8vh,84px);padding-top:18px;border-top:1px solid var(--line);font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none;color:var(--text)}
+@media (max-width:760px){.foot.cute .f-line{flex-direction:column}.foot.cute .f-end{flex-direction:column;align-items:center}}
+@media (prefers-reduced-motion:reduce){.foot.cute i{animation:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 </head>
@@ -1191,54 +1275,54 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
       </div>
       <div class="collage" id="collage" aria-hidden="true">
         <div class="crow">
-          <div class="tile live" style="--a:1.49" data-demos="n4xt"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
-          <div class="tile" style="--a:0.667" data-set="assets/wall/fw-collage-4.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:0.8" data-set="assets/wall/frl-runway-christian-cowan.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile live" style="--a:1.778" data-demos="n4xt"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
+          <div class="tile solo" style="--a:0.667" data-site="thefw.app" data-set="assets/wall/fw-collage-4.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.799" data-site="frontrowlive.productions" data-set="assets/wall/frl-runway-christian-cowan.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:0.667" data-set="assets/wall/la-collage-boh.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-frontrow-0.jpg|assets/wall/site-frontrow-3.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-nyfw-0.jpg|assets/wall/site-nyfw-2.jpg|assets/wall/site-nyfwcol-1.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.667" data-site="lafw.live" data-set="assets/wall/la-collage-boh.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-frontrow-0.jpg|assets/wall/site-frontrow-3.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-nyfw-0.jpg|assets/wall/site-nyfw-2.jpg|assets/wall/site-nyfwcol-1.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.25" data-set="assets/wall/n4-area-runway.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-thefw-0.jpg|assets/wall/site-thefw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:0.8" data-set="assets/wall/la-culture-lounge.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:1.25" data-site="n4xt.com" data-set="assets/wall/n4-area-runway.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-thefw-0.jpg|assets/wall/site-thefw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.8" data-site="lafw.live" data-set="assets/wall/la-culture-lounge.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-nyfwcol-0.jpg|assets/wall/coll-nyfw-3.jpg|assets/wall/coll-nyfw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile live" style="--a:1.49" data-demos="frontrow"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
-          <div class="tile" style="--a:0.667" data-set="assets/wall/n4-shows-aknvas.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-nyfwcol-0.jpg|assets/wall/coll-nyfw-3.jpg|assets/wall/coll-nyfw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile live" style="--a:1.778" data-demos="frontrow"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
+          <div class="tile solo" style="--a:0.667" data-site="n4xt.com" data-set="assets/wall/n4-shows-aknvas.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-lafw-0.jpg|assets/wall/site-lafw-3.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-n4xt-0.jpg|assets/wall/site-n4xt-3.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:0.667" data-set="assets/wall/ny-ny-x-ps-shearling.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-lafw-0.jpg|assets/wall/site-lafw-3.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-n4xt-0.jpg|assets/wall/site-n4xt-3.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.662" data-site="nyfw.live" data-set="assets/wall/ny-ny-x-ps-shearling.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:0.8" data-set="assets/wall/frl-dinner-2.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-nyfw-1.jpg|assets/wall/site-nyfw-3.jpg|assets/wall/ny-ny-g-dinner-room.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-lafw-1.jpg|assets/wall/site-lafw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.8" data-site="frontrowlive.productions" data-set="assets/wall/frl-dinner-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-nyfw-1.jpg|assets/wall/site-nyfw-3.jpg|assets/wall/ny-ny-g-dinner-room.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-lafw-1.jpg|assets/wall/site-lafw-2.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:0.667" data-set="assets/wall/fw-collage-2.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile live" style="--a:1.49" data-demos="lafw"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-frontrow-1.jpg|assets/wall/site-frontrow-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.667" data-site="thefw.app" data-set="assets/wall/fw-collage-2.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile live" style="--a:1.778" data-demos="lafw"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-frontrow-1.jpg|assets/wall/site-frontrow-2.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.49" data-set="assets/wall/fw-collage-2b.jpg|assets/wall/site-thefw-1.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/site-n4xt-1.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:0.667" data-set="assets/wall/ny-ny-x-siriano-corset.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:1.5" data-site="thefw.app" data-set="assets/wall/fw-collage-2b.jpg|assets/wall/site-thefw-1.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/site-n4xt-1.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.667" data-site="nyfw.live" data-set="assets/wall/ny-ny-x-siriano-corset.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.49" data-set="assets/wall/coll-lafw-0.jpg|assets/wall/coll-lafw-1.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:0.667" data-set="assets/wall/ny-fashion-fforme.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/frl-hero-collage-2c.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile" style="--a:1.488" data-set="assets/wall/coll-lafw-0.jpg|assets/wall/coll-lafw-1.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:0.667" data-site="nyfw.live" data-set="assets/wall/ny-fashion-fforme.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:1.5" data-site="frontrowlive.productions" data-set="assets/wall/frl-hero-collage-2c.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
         <div class="crow">
-          <div class="tile" style="--a:1.49" data-set="assets/wall/n4-contact.jpg"><div class="frame"></div><div class="frame"></div></div>
-          <div class="tile live" style="--a:1.49" data-demos="thefw"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
-          <div class="tile" style="--a:1.49" data-set="assets/wall/ny-ny-close-finale.jpg|assets/wall/ny-venue-skyline-stage.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile solo" style="--a:1.5" data-site="n4xt.com" data-set="assets/wall/n4-contact.jpg"><div class="frame"></div><div class="frame"></div></div>
+          <div class="tile live" style="--a:1.778" data-demos="thefw"><video class="frame" muted loop playsinline preload="none"></video><video class="frame" muted loop playsinline preload="none"></video></div>
+          <div class="tile solo" style="--a:1.5" data-site="nyfw.live" data-set="assets/wall/ny-ny-close-finale.jpg|assets/wall/ny-venue-skyline-stage.jpg"><div class="frame"></div><div class="frame"></div></div>
         </div>
       </div>
     </div>
@@ -1283,11 +1367,11 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
       <div class="pane on" data-pane="new">
       <h2 class="head serif reveal">New <em>site</em></h2>
       <div class="packs">
-        <article class="pack reveal" style="--d:0s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u></div><div class="url"><span>yoursite.com</span></div></div><div class="body"><h3>1 page site</h3><b>$800</b></div></article>
-        <article class="pack reveal" style="--d:0.08s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></div><div class="url"><span>yoursite.com/about</span></div></div><div class="body"><h3>3 page site</h3><b>$1,100</b></div></article>
-        <article class="pack reveal" style="--d:0.16s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u><u style="--k:3"></u><u style="--k:4"></u></div><div class="url"><span>yoursite.com/work</span></div></div><div class="body"><h3>5 page site</h3><b>$1,400</b></div></article>
-        <article class="pack reveal" style="--d:0.24s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u><u style="--k:3"></u><u style="--k:4"></u><u style="--k:5"></u><u class="maybe" style="--k:6"></u><u class="maybe" style="--k:7"></u></div><div class="url"><span>yoursite.com/more</span></div></div><div class="body"><h3>6–10 page site</h3><b>$1,550–$2,150</b></div></article>
-        <article class="pack reveal" style="--d:0.32s"><div class="body"><h3>11+ page site</h3><b>$2,300+</b></div></article>
+        <article class="pack reveal" style="--d:0s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u></div><div class="url"><span>yoursite.com</span></div></div><div class="body"><h3><i>1</i> page site</h3><b>$800</b></div></article>
+        <article class="pack reveal" style="--d:0.08s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u></div><div class="url"><span>yoursite.com/about</span></div></div><div class="body"><h3><i>3</i> page site</h3><b>$1,100</b></div></article>
+        <article class="pack reveal" style="--d:0.16s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u><u style="--k:3"></u><u style="--k:4"></u></div><div class="url"><span>yoursite.com/work</span></div></div><div class="body"><h3><i>5</i> page site</h3><b>$1,400</b></div></article>
+        <article class="pack reveal" style="--d:0.24s"><div class="chrome"><div class="tabs"><i></i><i></i><i></i><u style="--k:0"></u><u style="--k:1"></u><u style="--k:2"></u><u style="--k:3"></u><u style="--k:4"></u><u style="--k:5"></u><u class="maybe" style="--k:6"></u><u class="maybe" style="--k:7"></u></div><div class="url"><span>yoursite.com/more</span></div></div><div class="body"><h3><i>6–10</i> page site</h3><b>$1,550–$2,150</b></div></article>
+        <article class="pack reveal" style="--d:0.32s"><div class="body"><h3><i>11+</i> page site</h3><b>$2,300+</b></div></article>
       </div>
       <p class="extra serif reveal">Each extra page <em>$125–$175</em></p>
       <button class="swap serif" type="button" data-pane="care">Already have a site? <em>Open the maintenance pricing tab</em></button>
@@ -1323,6 +1407,7 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
       <button class="caps chg" type="button" data-pane="new">Change package</button>
     </aside>
     <form class="inq mail" id="inq">
+      <div class="total" aria-live="polite"><em id="tName"></em><strong id="tPrice"></strong></div>
       <div class="mrow"><input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required /><input type="email" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required /></div>
       <fieldset class="mrow need"><legend class="sr">What do you need?</legend><label><input type="radio" name="need" value="Single page" checked /><span>Single page</span></label><label><input type="radio" name="need" value="3 pages" /><span>3 pages</span></label><label><input type="radio" name="need" value="5 pages" /><span>5 pages</span></label><label><input type="radio" name="need" value="6–8 pages" /><span>6–8 pages</span></label><label><input type="radio" name="need" value="Site maintenance" /><span>Site maintenance</span></label><label><input type="radio" name="need" value="Not sure yet" /><span>Not sure yet</span></label></fieldset>
       <div class="mrow"><input type="text" name="biz" placeholder="Business or field" aria-label="Business or field" autocomplete="organization" /></div>
@@ -1332,7 +1417,7 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
     </form>
     </div>
       </div>
-      <p class="fine reveal">You pay for your domain and hosting; the setup is done for you. Weekly and monthly upkeep are quoted to fit your site.</p>
+      <p class="fine reveal">Domain and hosting are billed to you. Setup is included.</p>
     </div>
   </section>
   </div>
@@ -1345,12 +1430,10 @@ body.onfloat .floatb{opacity:1;pointer-events:auto}
   <div class="pbody" id="pbody"></div>
 </div>
 
-<footer class="foot" id="foot">
-  <div class="f-row2">
-    <a class="f-mark" href="#top" aria-label="by blake"><img class="fb" src="assets/brand/byblake-b.png" alt="" /><img class="fw" src="assets/brand/byblake-wordmark.png" alt="by blake" /></a>
-    <div class="f-info"><a class="serif" href="tel:+19144500053">914 450 0053</a><span class="caps">New York</span></div>
-  </div>
-  <div class="f-end caps"><span>© 2026 by blake</span><span>Websites, designed and built</span></div>
+<footer class="foot cute" id="foot">
+  <a class="f-mark" href="#top" aria-label="by blake"><img class="fb" src="assets/brand/byblake-b.png" alt="" /><img class="fw" src="assets/brand/byblake-wordmark.png" alt="by blake" /></a>
+  <div class="f-line"><a href="mailto:sitesbyblake@gmail.com">sitesbyblake@gmail.com</a><a href="tel:+19144500053">914 450 0053</a></div>
+  <div class="f-end"><span>© 2026 by blake</span><span>New York</span></div>
 </footer>
 
 <script>
@@ -1469,7 +1552,7 @@ addEventListener('DOMContentLoaded', () => {
       if (f >= .97 && !counted) { counted = true; countStats(); } else if (f < .1) counted = false;
     }
     top.classList.toggle('solid', still ? workTop < vh * .2 : (f >= .97));
-    coverOn = p < 1; document.body.classList.toggle('onfloat', p >= 1 && !top.classList.contains('solid') && !document.body.classList.contains('nofloat')); byfill.style.transform = p ? `scale(${(1 + 319 * p * p * p).toFixed(3)})` : ''; bysub.style.opacity = (1 - clamp(p / .1)).toFixed(3); bysub.style.visibility = p > .1 ? 'hidden' : ''; byline.style.transform = byfill.style.transform; byline.style.opacity = (1 - clamp((p - .04) / .3)).toFixed(3); byline.style.visibility = p > .34 ? 'hidden' : '';
+    coverOn = p < 1; document.body.classList.toggle('onfloat', p >= 1 && !top.classList.contains('solid') && !document.body.classList.contains('nofloat')); byfill.style.transform = p ? `scale(${(1 + 319 * p * p * p).toFixed(3)})` : ''; bysub.style.opacity = (1 - clamp(p / .1)).toFixed(3); byline.style.transform = byfill.style.transform; byline.style.opacity = (1 - clamp((p - .04) / .3)).toFixed(3); byline.style.visibility = p > .34 ? 'hidden' : '';
     // the credit screen pins and recedes as the pricing window rises over it
     const prTop = pricingEl.getBoundingClientRect().top, cover = still ? 0 : clamp((vh - prTop) / vh);
     const prBox = pricingEl.getBoundingClientRect(), inPr = prBox.top < vh * .4 && prBox.bottom > vh * .35;  if (contactEl.getBoundingClientRect().top < vh * .5) top.classList.remove('solid');
@@ -1566,7 +1649,17 @@ addEventListener('DOMContentLoaded', () => {
   // checkout: choosing a package (or a maintenance item) fills "Your order" and takes you to the form
   const ORD = { name: 'Single page', price: '$600', time: '', note: '' };
   let lastLine = '';
-  const stamp = () => { const ta = $('#inq textarea'), maint = ORD.note === 'Site maintenance' || ORD.name === 'Site maintenance', line = maint ? `Website maintenance, ${($('[name=freq]:checked') || {}).value.toLowerCase()}: ${ORD.name} (${ORD.price})` : `Package: ${ORD.name} (${ORD.price})`, rest = lastLine && ta.value.startsWith(lastLine) ? ta.value.slice(lastLine.length).replace(/^\n+/, '') : ta.value; ta.value = line + '\n\n' + rest; lastLine = line; };
+  // the big running total beside the form: the chosen option's name, and its price counting to the new figure
+  let tFrom = [], tRaf = 0;
+  const total = () => { const nm = $('#tName'), pr = $('#tPrice'); if (!nm) return; nm.textContent = ORD.name; pr.classList.toggle('long', ORD.price.length > 6); cancelAnimationFrame(tRaf);
+    const to = (ORD.price.match(/[\d,]+/g) || []).map(x => +x.replace(/,/g, ''));
+    if (!to.length || matchMedia('(prefers-reduced-motion: reduce)').matches) { pr.textContent = ORD.price; tFrom = []; return; }
+    // every figure in the price counts to its new value, ranges included
+    const from = to.map((v, k) => tFrom[k] !== undefined ? tFrom[k] : (tFrom[0] || 0)), t0 = performance.now(); tFrom = to;
+    const tick = now => { const k = Math.min((now - t0) / 700, 1), e = 1 - Math.pow(1 - k, 3); let n = 0;
+      pr.textContent = ORD.price.replace(/[\d,]+/g, () => { const v = Math.round(from[n] + (to[n] - from[n]) * e); n++; return v.toLocaleString('en-US'); }); if (k < 1) tRaf = requestAnimationFrame(tick); };
+    tRaf = requestAnimationFrame(tick); };
+  const stamp = () => total(); // the choice shows as the big total; the message box stays empty for the visitor's own words
   const paint = () => { stamp(); $('#oName').textContent = ORD.name; $('#oPrice').textContent = ORD.price; $('#oTime').textContent = ORD.time; $('#oNote').textContent = ORD.note; const o = $('#order'); o.classList.remove('bump'); o.offsetWidth; o.classList.add('bump'); };
   $$('#pricing .pack b, #pricing .fix b').forEach(b => b.dataset.full = b.textContent);
   const fromCard = c => { const pack = c.classList.contains('pack'); return { name: $(pack ? 'h3' : 'h4', c).textContent, price: $('b', c).dataset.full, time: '', note: pack ? (c === $('#pricing .pack') ? '' : 'Each extra page $125–$175') : 'Site maintenance' }; };
@@ -1643,18 +1736,27 @@ addEventListener('DOMContentLoaded', () => {
   }
 
   // projects: each opens into its own screen, with a tab for every project along the top
-  const PROJECTS = [{"id": "n4xt", "name": "N4XT", "url": "https://n4xt.com", "line": "The company behind New York Fashion Week Collections and LA Fashion Week.", "hi": ["Full-screen runway opening", "Drifting partner logos", "Press quotes"], "shots": ["assets/wall/site-n4xt-0.jpg", "assets/wall/site-n4xt-1.jpg", "assets/wall/site-n4xt-3.jpg"], "photos": [["assets/look/n4-a.jpg", 0.666], ["assets/wall/n4-area-runway.jpg", 1.25], ["assets/wall/n4-shows-aknvas.jpg", 0.667]], "demo": "n4xt", "host": "n4xt.com"}, {"id": "nyfw-live", "name": "NYFW LIVE", "demo": "nyfw", "url": "https://nyfw.live", "line": "New York Fashion Week, live: a countdown to the dates, tickets and partnerships.", "hi": ["Live countdown", "Tickets and partnerships", "Moving photo collage"], "shots": ["assets/wall/site-nyfw-0.jpg", "assets/wall/site-nyfw-1.jpg", "assets/wall/site-nyfw-2.jpg", "assets/wall/site-nyfw-3.jpg"], "photos": [["assets/look/ny-a.jpg", 0.663], ["assets/wall/ny-venue-skyline-stage.jpg", 1.5], ["assets/look/ny-b.jpg", 0.666]], "host": "nyfw.live"}, {"id": "lafw-live", "name": "LAFW LIVE", "demo": "lafw", "url": "https://lafw.live", "line": "Los Angeles culture, through the lens of fashion.", "hi": ["Live countdown", "Fashion, music, sports and culture tabs", "Moving photo collage"], "shots": ["assets/wall/site-lafw-0.jpg", "assets/wall/site-lafw-1.jpg", "assets/wall/site-lafw-2.jpg", "assets/wall/site-lafw-3.jpg"], "photos": [["assets/look/la-a.jpg", 0.8], ["assets/wall/la-collage-live.jpg", 1.25], ["assets/look/la-b.jpg", 0.75]], "host": "lafw.live"}, {"id": "nyfw-collections", "name": "NYFW Collections", "demo": "nyfwcollections", "url": "https://www.nyfwcollections.com/september2026", "line": "The official website of New York Fashion Week Collections: the September 2026 season.", "hi": ["Every designer on the schedule, with a portrait and a shop link", "September 9 to 15, 2026", "Partners and event-updates sign-up"], "shots": ["assets/wall/site-nyfwcol-0.jpg", "assets/wall/site-nyfwcol-1.jpg", "assets/wall/site-nyfwcol-2.jpg", "assets/wall/site-nyfwcol-3.jpg"], "photos": [["assets/wall/ny-ny-x-siriano-corset.jpg", 0.667], ["assets/wall/ny-ny-close-finale.jpg", 1.5], ["assets/wall/ny-fashion-fforme.jpg", 0.667]], "host": "nyfwcollections.com/september2026"}, {"id": "front-row-live", "name": "Front Row Live", "demo": "frontrow", "url": "https://frontrowlive.productions", "line": "An event and experiential production company.", "hi": ["Services and capabilities", "Project gallery", "Contact"], "shots": ["assets/wall/site-frontrow-0.jpg", "assets/wall/site-frontrow-1.jpg", "assets/wall/site-frontrow-2.jpg", "assets/wall/site-frontrow-3.jpg"], "photos": [["assets/look/frl-a.jpg", 0.799], ["assets/wall/frl-hero-collage-2c.jpg", 1.5], ["assets/look/frl-b.jpg", 0.8]], "host": "frontrowlive.productions"}, {"id": "fw", "name": ".FW", "demo": "thefw", "url": "https://thefw.app", "line": "The app for Fashion Week, with an early-access list.", "hi": ["The app, shown on a phone", "Early-access sign-up"], "shots": ["assets/wall/site-thefw-0.jpg", "assets/wall/site-thefw-2.jpg"], "photos": [["assets/look/fw-a.jpg", 0.666], ["assets/wall/fw-collage-2b.jpg", 1.5], ["assets/look/fw-b.jpg", 0.667]], "host": "thefw.app"}, {"id": "directchef", "name": "DirectChef", "url": "https://blakemassoni.com/firstmobiledesign.html", "line": "A meal-prep app design, walked through screen by screen.", "hi": ["Six app screens", "A recipe that fills the bowl step by step", "A journey through every phone screen"], "shots": ["assets/wall/site-directchef-0.jpg", "assets/wall/site-directchef-phones.jpg", "assets/wall/site-directchef-bowl.jpg", "assets/wall/site-directchef-nav.jpg", "assets/wall/site-directchef-journey.jpg", "assets/wall/site-directchef-journey2.jpg"], "photos": [], "demo": "directchef", "host": "blakemassoni.com/firstmobiledesign.html"}, {"id": "blake-massoni", "name": "Blake Massoni", "demo": "massoni", "url": "https://blakemassoni.com", "line": "My own portfolio, built to look and work like a search page.", "hi": ["A home page that works like a search box", "Projects listed as search results", "Pages for IL MAKIAGE, Van Wagner, the Penn student portal and freelance sites"], "shots": ["assets/wall/site-massoni-0.jpg", "assets/wall/site-massoni-search.jpg", "assets/wall/site-massoni-ilmakiage.jpg", "assets/wall/site-massoni-vanwagner.jpg", "assets/wall/site-massoni-penn.jpg", "assets/wall/site-massoni-freelance.jpg"], "photos": [], "host": "blakemassoni.com"}];
+  const PROJECTS = [{"id": "n4xt", "name": "N4XT", "url": "https://n4xt.com", "line": "The company behind New York Fashion Week Collections and LA Fashion Week.", "hi": ["Full-screen runway opening", "Brand platform overview", "Drifting partner logos", "Press quote carousel", ".FW app preview"], "shots": ["assets/wall/site-n4xt-0.jpg", "assets/wall/site-n4xt-1.jpg", "assets/wall/site-n4xt-3.jpg"], "photos": [["assets/look/n4-a.jpg", 0.666], ["assets/wall/n4-area-runway.jpg", 1.25], ["assets/wall/n4-shows-aknvas.jpg", 0.667]], "demo": "n4xt", "host": "n4xt.com", "ar": 1.778, "tag": "We shape what’s next in culture.", "desc": "Company site for N4XT, which owns and operates New York Fashion Week Collections and LA Fashion Week. The site brings its platforms together, from the shows and experiential work to partners, press and the upcoming .FW app.", "facts": [["Client", "N4XT Inc."], ["Role", "Design and development"], ["Type", "Company and brand site"], ["Status", "Live"]]}, {"id": "nyfw-live", "name": "NYFW LIVE", "demo": "nyfw", "url": "https://nyfw.live", "line": "New York Fashion Week, live: a countdown to the dates, tickets and partnerships.", "hi": ["Live countdown", "Moving photo collage", "Ticket list sign-up", "Partnerships inquiry form"], "shots": ["assets/wall/site-nyfw-0.jpg", "assets/wall/site-nyfw-1.jpg", "assets/wall/site-nyfw-2.jpg", "assets/wall/site-nyfw-3.jpg"], "photos": [["assets/look/ny-a.jpg", 0.663], ["assets/wall/ny-venue-skyline-stage.jpg", 1.5], ["assets/look/ny-b.jpg", 0.666]], "host": "nyfw.live", "ar": 1.778, "tag": "New York culture, through the lens of fashion.", "desc": "Launch site for NYFW LIVE, two days of fashion, sports, music and culture in New York City on September 10 and 11, 2027. The site builds anticipation with a live countdown, collects early ticket interest and gives brands a direct line to partnerships.", "facts": [["Client", "NYFW LIVE · N4XT Inc."], ["Role", "Design and development"], ["Type", "Event launch site"], ["Event", "September 10 and 11, 2027"]]}, {"id": "lafw-live", "name": "LAFW LIVE", "demo": "lafw", "url": "https://lafw.live", "line": "Los Angeles culture, through the lens of fashion.", "hi": ["Live countdown", "Fashion, music, sports and culture tabs", "Moving photo collage", "Ticket waitlist sign-up", "Partnerships inquiry form"], "shots": ["assets/wall/site-lafw-0.jpg", "assets/wall/site-lafw-1.jpg", "assets/wall/site-lafw-2.jpg", "assets/wall/site-lafw-3.jpg"], "photos": [["assets/look/la-a.jpg", 0.8], ["assets/wall/la-collage-live.jpg", 1.25], ["assets/look/la-b.jpg", 0.75]], "host": "lafw.live", "ar": 1.778, "tag": "Los Angeles culture, through the lens of fashion.", "desc": "Launch site for LAFW LIVE, a weekend-long Los Angeles festival where fashion, music, sports and art collide, curated by Russell Westbrook. The site builds anticipation for Summer 2027 with a live countdown, captures early ticket interest and gives brands a direct line to partnerships.", "facts": [["Client", "LAFW LIVE · N4XT Inc."], ["Role", "Design and development"], ["Type", "Event launch site"], ["Event", "Summer 2027"]]}, {"id": "nyfw-collections", "name": "NYFW Collections", "demo": "nyfwcollections", "url": "https://www.nyfwcollections.com/september2026", "line": "The official website of New York Fashion Week Collections: the September 2026 season.", "hi": ["Every designer on the schedule", "Portraits with shop links", "Season partners", "Event-updates sign-up"], "shots": ["assets/wall/site-nyfwcol-0.jpg", "assets/wall/site-nyfwcol-1.jpg", "assets/wall/site-nyfwcol-2.jpg", "assets/wall/site-nyfwcol-3.jpg"], "photos": [["assets/wall/ny-ny-x-siriano-corset.jpg", 0.667], ["assets/wall/ny-ny-close-finale.jpg", 1.5], ["assets/wall/ny-fashion-fforme.jpg", 0.667]], "host": "nyfwcollections.com/september2026", "ar": 1.778, "tag": "The official home of the September 2026 season.", "desc": "The official website of New York Fashion Week Collections for the September 2026 season, running September 9 to 15. Every designer on the schedule has a portrait and a shop link, alongside the season’s partners and a sign-up for event updates.", "facts": [["Client", "NYFW Collections · N4XT Inc."], ["Role", "Design and development"], ["Type", "Official season site"], ["Season", "September 9 to 15, 2026"]]}, {"id": "front-row-live", "name": "Front Row Live", "demo": "frontrow", "url": "https://frontrowlive.productions", "line": "An event and experiential production company.", "hi": ["Services and capabilities", "Selected projects", "Photo gallery", "Contact"], "shots": ["assets/wall/site-frontrow-0.jpg", "assets/wall/site-frontrow-1.jpg", "assets/wall/site-frontrow-2.jpg", "assets/wall/site-frontrow-3.jpg"], "photos": [["assets/look/frl-a.jpg", 0.799], ["assets/wall/frl-hero-collage-2c.jpg", 1.5], ["assets/look/frl-b.jpg", 0.8]], "host": "frontrowlive.productions", "ar": 1.778, "tag": "The cultural moments of fashion week and beyond.", "desc": "Website for Front Row Live Productions, a full-service event and experiential production company in New York and Los Angeles. The site walks through its full capabilities, from runway shows and brand activations to retail pop-ups, private events and live programming, alongside selected projects.", "facts": [["Client", "Front Row Live Productions"], ["Role", "Design and development"], ["Type", "Company and services site"], ["Status", "Live"]]}, {"id": "fw", "name": ".FW", "demo": "thefw", "url": "https://thefw.app", "line": "The app for Fashion Week, with an early-access list.", "hi": ["The app, shown on a phone", "Early-access sign-up", "Email and SMS opt-in", "Photo collage"], "shots": ["assets/wall/site-thefw-0.jpg", "assets/wall/site-thefw-2.jpg"], "photos": [["assets/look/fw-a.jpg", 0.666], ["assets/wall/fw-collage-2b.jpg", 1.5], ["assets/look/fw-b.jpg", 0.667]], "host": "thefw.app", "ar": 1.778, "tag": "Fashion Week, all in one place.", "desc": "Early-access site for .FW, the official digital platform for New York Fashion Week and beyond. Ahead of its February 2027 launch in New York and Los Angeles, the site introduces the app, where people will watch shows live, shop collections and discover designers, and builds an invite-only waitlist.", "facts": [["Client", ".FW · N4XT Inc."], ["Role", "Design and development"], ["Type", "App launch site"], ["Launch", "February 2027"]]}, {"id": "directchef", "name": "DirectChef", "url": "https://blakemassoni.com/firstmobiledesign.html", "line": "A meal-prep app design, walked through screen by screen.", "hi": ["Six app screens", "A recipe that fills the bowl step by step", "A journey through every phone screen"], "shots": ["assets/wall/site-directchef-0.jpg", "assets/wall/site-directchef-phones.jpg", "assets/wall/site-directchef-bowl.jpg", "assets/wall/site-directchef-nav.jpg", "assets/wall/site-directchef-journey.jpg", "assets/wall/site-directchef-journey2.jpg"], "photos": [], "demo": "directchef", "host": "the case study", "ar": 1.778, "tag": "A meal-prep app, screen by screen.", "desc": "A mobile app design for meal prep, presented as a case study. The page walks through six app screens, a recipe that fills the bowl step by step, and the full journey from one phone screen to the next.", "facts": [["Project", "DirectChef"], ["Role", "App design and case study page"], ["Type", "Mobile app design"], ["Status", "Live"]]}, {"id": "blake-massoni", "name": "Blake Massoni", "demo": "massoni", "url": "https://blakemassoni.com", "line": "My own portfolio, built to look and work like a search page.", "hi": ["A home page that works like a search box", "Projects listed as search results", "A page for every project"], "shots": ["assets/wall/site-massoni-0.jpg", "assets/wall/site-massoni-search.jpg", "assets/wall/site-massoni-ilmakiage.jpg", "assets/wall/site-massoni-vanwagner.jpg", "assets/wall/site-massoni-penn.jpg", "assets/wall/site-massoni-freelance.jpg"], "photos": [], "host": "blakemassoni.com", "ar": 1.442, "tag": "A portfolio that works like a search page.", "desc": "A personal portfolio designed to look and work like a search page. The home page is a search box, projects come back as search results, and each result opens onto its own page: IL MAKIAGE, Van Wagner, the Penn student portal and freelance web design.", "facts": [["Client", "Blake Massoni"], ["Role", "Design and development"], ["Type", "Personal portfolio"], ["Status", "Live"]]}];
   const proj = $('#proj'), pbody = $('#pbody'), ptabs = $('#ptabs'); let openId = null;
   PROJECTS.forEach(q => { const b = document.createElement('button'); b.type = 'button'; b.textContent = q.name; b.dataset.p = q.id; ptabs.append(b); });
   const fill = id => {
     const k = PROJECTS.findIndex(q => q.id === id), q = PROJECTS[k], next = PROJECTS[(k + 1) % PROJECTS.length];
-    pbody.innerHTML = `<div class="phero"><figure><video muted loop playsinline autoplay poster="assets/work/demo/${q.demo}.jpg" src="assets/work/demo/${q.demo}.mp4"></video></figure></div>
-      <div class="pinfo"><div><h2 class="serif">${q.name}</h2><a class="btn" href="${q.url}" target="_blank" rel="noopener">Visit ${q.host}</a></div>
-      <div><p>${q.line}</p><ul>${q.hi.map(h => `<li>${h}</li>`).join('')}</ul></div></div>
-      <div class="pshots">${q.shots.map(f => `<img src="${f}" alt="" loading="lazy" />`).join('')}</div>
-      ${q.photos.length ? `<div class="pphotos">${q.photos.map(f => `<img style="--a:${f[1]}" src="${f[0]}" alt="" loading="lazy" />`).join('')}</div>` : ''}
+    pbody.innerHTML = `<div class="phero"><figure style="--ar:${q.ar}"><video muted loop playsinline autoplay poster="assets/work/demo/${q.demo}.jpg" src="assets/work/demo/${q.demo}.mp4"></video><span class="plive">Explore the live site</span></figure></div>
+      <div class="ptop"><div><h2 class="serif">${q.name}</h2><p class="ptag">${q.tag}</p></div><a class="btn" href="${q.url}" target="_blank" rel="noopener">Visit site</a></div>
+      <dl class="pfacts">${q.facts.map(x => `<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join('')}</dl>
+      <div class="pabout"><div><h3>About the project</h3><p>${q.desc}</p></div>
+      <div><h3>On the site</h3><ul>${q.hi.map(h => `<li>${h}</li>`).join('')}</ul></div></div>
       <button class="pnext" type="button" data-p="${next.id}">Next <i>${next.name}</i></button>`;
     $$('button', ptabs).forEach(b => { b.classList.toggle('on', b.dataset.p === id); if (b.dataset.p === id) b.scrollIntoView({ block: 'nearest', inline: 'center' }); });
+    // the film scrolls the whole site by itself; click it and the real site takes its place to browse; leave it alone and the film returns
+    const fig = $('.phero figure', pbody), vid = $('video', fig); let back = 0;
+    const film = () => { clearTimeout(back); const fr = $('iframe', fig); if (fr) fr.remove(); if (fig.classList.contains('live')) { fig.classList.remove('live'); vid.play().catch(() => {}); } };
+    const live = () => { if (fig.classList.contains('live')) return; fig.classList.add('live'); vid.pause(); const fr = document.createElement('iframe'); fr.src = q.url; fr.title = q.name + ', the live site'; fr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups'); fig.append(fr); };
+    fig.addEventListener('click', live);
+    fig.addEventListener('mouseleave', () => { if (fig.classList.contains('live')) back = setTimeout(film, 5000); });
+    fig.addEventListener('mouseenter', () => clearTimeout(back));
+    if (window.__filmWatch) window.__filmWatch.disconnect();
+    if ('IntersectionObserver' in window) { window.__filmWatch = new IntersectionObserver(es => { if (!es[0].isIntersecting) film(); }, { root: proj }); window.__filmWatch.observe(fig); }
     proj.scrollTop = 0; openId = id;
   };
   const openProj = (id, from, push = true) => {
